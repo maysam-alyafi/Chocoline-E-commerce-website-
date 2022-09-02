@@ -1,0 +1,58 @@
+{% extends 'blog/index.html' %}
+
+{% block title %}checkout{% endblock %}
+
+{% block content %}
+<style>
+    .errorlist {
+        color: red;
+    }
+</style>
+<br><br><br><br><br><br><br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Items in the cart</h3>
+            <a href="{% url 'blog:cart' %}">Update Cart</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th></th>
+                        <th>Product</th>
+                        <th>price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><img class="rotprod" src="{{cp.product.image.url}}" width="150"  height="150" alt=""></td>
+                      <td><a target="_blank"
+                                href="">{{cp.product.name}}</a>
+                        <td>{{cp.price}}</td>
+                        <td>{{cp.quantity}}</td>
+                        <td>{{cp.subtotal}}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4" class="text-right">Total</th>
+                        <th>{{cart.total}} SAR</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h3>Checkout Form</h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-primary" style="background-color: #42322B;"> Place Order</button>
+            </form>
+        </div>/
+    </div>
+</div>
+<br><br><br><br><br>
+{% endblock %}

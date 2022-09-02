@@ -1,0 +1,53 @@
+{% extends 'blog/index.html' %}
+{% block title %}Customer Login{% endblock %}
+{% block content %}
+<style>
+    .errorlist {
+        color: red;
+    }
+</style>
+<body>
+<div id="enquiry">
+    <div class="section wow pulse"><br><br><br><br><br>
+
+<!-- Main Content -->
+	<div class="container-fluid">
+		<div class="row main-content bg-success text-center">
+			<div class="col-md-4 text-center company__info">
+				<span class="company__logo"><h2><span class="fa fa-user fa-3x"></span></h2></span>
+				<h4 class="company_title">Login in Chocoline</h4>
+			</div>
+			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+				<div class="container-fluid">
+					<div class="row">
+					</div>
+					<div class="col-md-12"><h1 class="title text-center  wow fadeInLeft">
+                        <span> Login</span></h1>
+                        <hr>
+                        <form action="" method="POST" class="text-center" >
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <button class="btn btn-primary"style="background-color: #42322B;" >Login</button>
+                            {% if error %}
+                            <li style="color: red;">{{error}}</li>
+                            {% endif %}
+                        </form>
+                        <center><p> Don't Have an Account? <a
+                                href="{% url 'blog:customerregistration' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">Register
+                            here</a></p>
+                        </center>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <div>
+    </div>
+</div>
+</html>
+</body>
+
+
+
+{% endblock %}

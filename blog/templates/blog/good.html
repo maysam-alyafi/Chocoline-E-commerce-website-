@@ -1,0 +1,42 @@
+{% extends 'blog/index.html' %}
+{% block title %}products{% endblock %}
+{% block content %}
+<div class="main section" id="specialities" xmlns="http://www.w3.org/1999/html"><br><br>
+        <div class="container"><br><br><br><br>
+            <div class="col-md-12"><h1 class="title text-center wow fadeInLeft"><span>Our products</span></h1>
+
+
+                <div class="speciality wow fadeIn" data-wow-delay="0.6s">
+        {% for x in product_list %}
+
+                    <div class="spe-prods" style="background-color: #bfa69d;">
+                        <div class="price-top">
+                            <h2>{{x.name}}</h2>
+                            <img class="rotprod" src="{{x.image.url}}"  alt="">
+                        </div>
+
+<br ><br >
+                        <div class="price-bottom">
+                            <center><div class="price1" >
+                                <div class="dotter"  >
+                                    <h3>{{x.price}} {{x.currency}}</h3>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                              <div class="price2"  >
+                                <a href="{% url 'blog:cart' x.id  %}" width="140"  class="buybtn" >Add To Cart</a>
+                            </div>
+                            </center>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

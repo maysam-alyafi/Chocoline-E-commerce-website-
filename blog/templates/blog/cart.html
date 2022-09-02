@@ -1,0 +1,59 @@
+{% extends 'blog/index.html' %}
+{% block title %}My Cart{% endblock %}
+{% block content %}
+<center>
+    <div class="container"><br><br><br><br><br><br><br> <br>
+        <div class="row">
+            <div class="col-md-8"><br><br>
+                <h4>Items in my cart</h4>
+                <hr>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><img class="rotprod" src="{{cp.product.image.url}}" alt=""></td>
+                        <td>{{cp.product.name}}</td>
+                        <td>{{cp.price}}</td>
+                        <td>{{cp.quantity}}</td>
+                        <td>{{cp.subtotal}}</td>
+                        <td>
+                            <a href="{% url 'blog:managecart' cp.id %}?action=inc" style="background-color:#faead4 " class="btn btn-dark"> + </a>
+                            <a href="{% url 'blog:managecart' cp.id %}?action=dcr" style="background-color:#faead4 " class="btn btn-dark"> - </a>
+                            <a href="{% url 'blog:managecart' cp.id %}?action=rmv" style="background-color:#faead4 " class="btn btn-dark"> x </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4" class="text-right">Total</th>
+                        <th> {{cart.total}} SR</th>
+                    </tr>
+                     </table>
+                    {% if cart.cartproduct_set.all %}
+
+                        <a class="buybtn" href="{% url 'blog:checkout' %} " style="background-color:#544938  "> Checkout </a>
+
+                    {% endif %}
+
+                        <a class="buybtn" href="{% url 'blog:good' %}" style="background-color:#544938  "> continue shopping </a>
+
+                    </tbody>
+
+            </div>
+        </div>
+    </div>
+</center>
+{% endblock %}
